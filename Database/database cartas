@@ -1,0 +1,11 @@
+CREATE TABLE POKEMONS.CARTAS
+(
+    ID_NAME     SERIAL        PRIMARY KEY
+  , NAME        VARCHAR(300)  NOT NULL
+  , STATUS      VARCHAR(300)  NOT NULL
+
+);
+
+
+INSERT INTO pokemons.CARTAS (NAME, STATUS)
+VALUES  ('Charmander', 'ativo');
