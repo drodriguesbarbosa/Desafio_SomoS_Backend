@@ -1,19 +1,19 @@
-from model.Connection import Connection
+from Model.Connection import Connection
 
 class ControllerCartas():
 
     def __init__(self):
-        self.status = 1
+        self.status = 1 
 
-    def insertCards(self, name, hp, attack, defense, special_attack, special_Defense, speed):
+    def insertCartas(self, name, hp, attack, defense, special_attack, special_Defense, speed):
         try:
             connection = Connection()
             conn_obj = connection.conn
             cursor = conn_obj.cursor()
 
-            insert_query = """ INSERT INTO "POKEMONS".ATTRIBUTES (NAME, HP, ATTACK, DEFENSE, SPECIAL_ATACK, SPECIAL_DEFENSE, SPEED)
-                                            VALUES (%s)
-                           """
+            insert_query = """ INSERT INTO "POKEMONS".CARTAS (NAME, HP, ATTACK, DEFENSE, SPECIAL_ATACK, SPECIAL_DEFENSE, SPEED)
+                                            VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+                                            
             record_to_insert = (name, hp, attack, defense, special_attack, special_Defense, speed,)
 
             cursos.execute(insert_query, record_to_insert)
