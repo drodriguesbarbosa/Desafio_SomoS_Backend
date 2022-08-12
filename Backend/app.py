@@ -3,6 +3,7 @@ from flask_cors import CORS
 from controller.controllercartas import ControllerCartas
 
 
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -67,6 +68,7 @@ def select_card_by_id(id):
     else:
         return jsonify({'status': 'false'})
 
+
 @app.route('/update_card/<string:id>', methods = ['POST'])
 def update_card():
 
@@ -81,13 +83,13 @@ def update_card():
                                              post_data.get ('special_defense'),
                                              post_data.get ('speed'))
 
+
   
 
     if result:
         return jsonify({'Status Code' : '200'})
     else:
         return jsonify({'status' : 'False'})
-
 
 
 if __name__ == '__main__':
