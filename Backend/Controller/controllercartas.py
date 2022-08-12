@@ -93,61 +93,97 @@ class ControllerCartas():
             print("Error during card selection. Error: {}".format(str(ex)))
             return False
 
-    def update_card(self, name, hp, attack, defense, special_attack, special_defense, speed):
-            try:
+    def update_card(self, id, name = "nan", hp = "nan", attack = "nan", defense = "nan", special_attack = "nan", special_defense = "nan", speed = "nan"):
+        try:
 
-                connection = Connection()
-                conn_obj = connection.conn
-                cursor = conn_obj.cursor()
+            connection = Connection()
+            conn_obj = connection.conn
+            cursor = conn_obj.cursor()
 
-                sql_select_query = """SELECT * FROM "POKEMONS"."CARTAS" WHERE ID=%s"""
+            sql_select_query = """SELECT * FROM "POKEMONS"."CARTAS" WHERE ID=%s"""
 
-                fields_to_select = (id)
-                cursor.execute(sql_select_query, fields_to_select)
-                record = cursor.fetchone()
+            fields_to_select = (id)
+            cursor.execute(sql_select_query, fields_to_select)
+            record = cursor.fetchone()
 
-                if record is None:
-                    print("Card {} not found!".format(id))
-                    return False
+            if record is None:
+                print("Card {} not found!".format(id))
+                return False
                 
-                print("Updating card: \n\n" + str(record) + "\n\n") # Use it as a backup in case of issues
+            print("Updating card: \n\n" + str(record) + "\n\n") # Use it as a backup in case of issues
 
-                update_query = """ UPDATE "POKEMONS"."CARTAS" 
-                                SET                                NAME            = %s
-                                                                   HP              = %s
-                                                                   ATTACK          = %s
-                                                                   DEFENSE         = %s
-                                                                   SPECIAL_ATTACK  = %s
-                                                                   SPECIAL_DEFENSE = %s
-                                                                   SPEED           = %s
-                                    WHERE ID = %s
-                                """
+            update_query = """ UPDATE "POKEMONS"."CARTAS" 
+                            SET                                NAME            = %s
+                                                               HP              = %s
+                                                               ATTACK          = %s
+                                                               DEFENSE         = %s
+                                                               SPECIAL_ATTACK  = %s
+                                                               SPECIAL_DEFENSE = %s
+                                                               SPEED           = %s
+                                WHERE ID = %s
+                            """
 
-                if name != "nan": 
-                    treated_card_name = name
-                else: 
-                    treated_card_name = record[1]
+            if name != "nan": 
+                treated_card_name = name
+            else: 
+                treated_card_name = record[1]
+
+            if hp != "nan": 
+                treated_card_hp = hp
+            else: 
+                treated_card_hp = record[2]
+                
+            if attack != "nan": 
+                treated_card_attack = attack
+            else: 
+                treated_card_attack = record[3]
+
+            if defense != "nan": 
+                treated_card_defense = defense
+            else: 
+                treated_card_defense = record[4]
+                    
+            if special_attack != "nan": 
+                treated_card_special_attack = special_attack
+            else: 
+                treated_card_special_attack = record[5]
+
+            if special_defense != "nan": 
+                treated_card_special_defense = special_defense
+            else: 
+                treated_card_special_defense = record[6]
+                    
+            if speed != "nan": 
+                treated_card_speed = speed
+            else: 
+                treated_card_speed = record[7]
                     
 
             
 
-                fields_to_update = (                                  treated_card_name
-                                                                    , id )
+            fields_to_update = (                                  treated_card_name
+                                                                , treated_card_hp
+                                                                , treated_card_attack
+                                                                , treated_card_defense
+                                                                , treated_card_special_attack
+                                                                , treated_card_defense
+                                                                , treated_card_speed
+                                                                , id )
                 
-                cursor.execute(update_query, fields_to_update)
-                conn_obj.commit()
-                count = cursor.rowcount
-                print(count, "Record updated successfully into card table.")
+            cursor.execute(update_query, fields_to_update)
+            conn_obj.commit()
+            count = cursor.rowcount
+            print(count, "Record updated successfully into card table.")
 
 
-                connection.close_connection(cursor = cursor, connection = conn_obj)
+            connection.close_connection(cursor = cursor, connection = conn_obj)
 
-                return True
+            return True
 
-            except Exception as ex:
+        except Exception as ex:
 
-                print("Error during card update. Error: {}".format(str(ex)))
-                return False
+            print("Error during card update. Error: {}".format(str(ex)))
+            return False
 
 
 

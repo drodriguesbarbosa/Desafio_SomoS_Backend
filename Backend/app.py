@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from controller.ControllerCartas import ControllerCartas
+from controller.controllercartas import ControllerCartas
 
 
 app = Flask(__name__)
@@ -67,20 +67,19 @@ def select_card_by_id(id):
     else:
         return jsonify({'status': 'false'})
 
-@app.route('/update_card/<string:id>', methods = ['PUT'])
-def update_card(id):
-
-    result = ControllerCartas().select_card_by_id(id)
+@app.route('/update_card/<string:id>', methods = ['POST'])
+def update_card():
 
     post_data = request.get_json(silent=True)
 
-    result = ControllerCartas().inserir_carta( post_data.get('name'),
-                                               post_data.get ('hp'),
-                                               post_data.get ('attack'),
-                                               post_data.get ('defense'),
-                                               post_data.get ('special_attack'),
-                                               post_data.get ('special_defense'),
-                                               post_data.get ('speed'))
+    result = ControllerCartas().update_card( post_data.get ('id'),
+                                             post_data.get ('name'),
+                                             post_data.get ('hp'),
+                                             post_data.get ('attack'),
+                                             post_data.get ('defense'),
+                                             post_data.get ('special_attack'),
+                                             post_data.get ('special_defense'),
+                                             post_data.get ('speed'))
 
   
 
