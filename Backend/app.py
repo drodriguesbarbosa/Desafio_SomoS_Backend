@@ -53,7 +53,7 @@ def select_all_cards():
     result = ControllerCartas().select_all_cards()
 
     if result:
-        return jsonify({'status': 'true', 'result': result})
+        return jsonify({'status': '200', 'result': result})
     else:
         return jsonify({'Status Code': '404'})
 
@@ -64,13 +64,13 @@ def select_card_by_id(id):
     result = ControllerCartas().select_card_by_id(id)
 
     if result:
-        return jsonify({'status': 'true', 'result': result})
+        return jsonify({'status': '200', 'id': result})
     else:
         return jsonify({'status': 'false'})
 
 
 @app.route('/update_card/<string:id>', methods = ['POST'])
-def update_card():
+def update_card(id):
 
     post_data = request.get_json(silent=True)
 
@@ -82,7 +82,6 @@ def update_card():
                                              post_data.get ('special_attack'),
                                              post_data.get ('special_defense'),
                                              post_data.get ('speed'))
-
 
   
 

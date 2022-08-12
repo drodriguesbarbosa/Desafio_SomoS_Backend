@@ -1,5 +1,5 @@
 
-from model.Connection import Connection
+from model.connection import Connection
 
 class ControllerCartas():
 
@@ -51,7 +51,13 @@ class ControllerCartas():
             for row in rows:
                 list_cards.append({
                           'id':                 row[0]
-                        , 'name':               row[1]})
+                        , 'name':               row[1]
+                        , 'hp':                 row[3]
+                        , 'attack':             row[4]
+                        , 'defense':            row[5]
+                        , 'special_attack':     row[6]
+                        , 'special_defense':    row[7]
+                        , 'speed':              row[8]})
 
             connection.close_connection(cursor = cursor, connection = conn_obj)
 
@@ -95,8 +101,8 @@ class ControllerCartas():
 
     def update_card(self, id, name = "nan", hp = "nan", attack = "nan", defense = "nan", special_attack = "nan", special_defense = "nan", speed = "nan"):
         try:
-
             connection = Connection()
+
             conn_obj = connection.conn
             cursor = conn_obj.cursor()
 
@@ -114,12 +120,12 @@ class ControllerCartas():
 
             update_query = """ UPDATE "POKEMONS"."CARTAS" 
                             SET                                NAME            = %s
-                                                               HP              = %s
-                                                               ATTACK          = %s
-                                                               DEFENSE         = %s
-                                                               SPECIAL_ATTACK  = %s
-                                                               SPECIAL_DEFENSE = %s
-                                                               SPEED           = %s
+                                                             , HP              = %s
+                                                             , ATTACK          = %s
+                                                             , DEFENSE         = %s
+                                                             , SPECIAL_ATTACK  = %s
+                                                             , SPECIAL_DEFENSE = %s
+                                                             , SPEED           = %s
                                 WHERE ID = %s
                             """
 
@@ -191,16 +197,5 @@ class ControllerCartas():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+   
 
