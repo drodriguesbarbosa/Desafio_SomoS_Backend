@@ -41,32 +41,53 @@ def inserir_carta():
   
 
     if result:
-        return jsonify({'Status Code' : '201'})
+        return jsonify({'Status Code' : '200'})
     else:
         return jsonify({'status' : 'False'})
 
 
-@app.route('/listar_cartas', methods=['GET'])
-def listar_cartas():
+@app.route('/select_all_cards', methods=['GET'])
+def select_all_cards():
 
-    result = ControllerCartas().listar_cartas()
+    result = ControllerCartas().select_all_cards()
+
+    if result:
+        return jsonify({'status': 'true', 'result': result})
+    else:
+        return jsonify({'Status Code': '404'})
+
+
+@app.route('/select_card_by_id/<string:id>', methods=['GET'])
+def select_card_by_id(id):
+
+    result = ControllerCartas().select_card_by_id(id)
 
     if result:
         return jsonify({'status': 'true', 'result': result})
     else:
         return jsonify({'status': 'false'})
 
+@app.route('/update_card/<string:id>', methods = ['PUT'])
+def update_card(id):
 
-@app.route('/consultar_carta/<string:id>', methods=['GET'])
-def consultar_carta(id):
+    result = ControllerCartas().select_card_by_id(id)
 
-    result = ControllerCartas().consultar_carta(id)
+    post_data = request.get_json(silent=True)
+
+    result = ControllerCartas().inserir_carta( post_data.get('name'),
+                                               post_data.get ('hp'),
+                                               post_data.get ('attack'),
+                                               post_data.get ('defense'),
+                                               post_data.get ('special_attack'),
+                                               post_data.get ('special_defense'),
+                                               post_data.get ('speed'))
+
+  
 
     if result:
-        return jsonify({'status': 'true', 'result': result})
+        return jsonify({'Status Code' : '200'})
     else:
-        return jsonify({'status': 'false'})
-
+        return jsonify({'status' : 'False'})
 
 
 
