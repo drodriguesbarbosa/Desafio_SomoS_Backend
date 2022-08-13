@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from controller.controllercartas import ControllerCartas
+from controller.controllerarena import ControllerArena
 
 
 
@@ -32,12 +33,13 @@ def inserir_carta():
     post_data = request.get_json(silent=True)
 
     result = ControllerCartas().inserir_carta( post_data.get('name'),
-                                               post_data.get ('hp'),
-                                               post_data.get ('attack'),
-                                               post_data.get ('defense'),
-                                               post_data.get ('special_attack'),
-                                               post_data.get ('special_defense'),
-                                               post_data.get ('speed'))
+                                               post_data.get ('attributes'(post_data.get ('hp'),
+                                                                           post_data.get ('attack'),
+                                                                           post_data.get ('defense'),
+                                                                           post_data.get ('special_attack'),
+                                                                           post_data.get ('special_defense'),
+                                                                           post_data.get ('speed')
+                                                                           )))
 
   
 
@@ -89,6 +91,18 @@ def update_card(id):
         return jsonify({'Status Code' : '200'})
     else:
         return jsonify({'status' : 'False'})
+
+
+#@app.route('/compare_cards/<string:id, id>', methods=['GET'])
+#def compare_cards(id):
+
+#    result = ControllerArena().compare_cards(id, id)
+
+#    if result:
+#        return jsonify({'winner': '200', 'loser': result, 'details':{'hp': 'hp', 'attack': , 'defense': , 'special_attack': , 'special_defense': , 'speed': }})
+#    else:
+#        return jsonify({'status': 'false'})
+
 
 
 if __name__ == '__main__':
