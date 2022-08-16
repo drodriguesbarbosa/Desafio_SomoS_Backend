@@ -15,7 +15,7 @@ class ControllerCartas():
             cursor = conn_obj.cursor()
 
             insert_query = """ INSERT INTO "POKEMONS"."CARTAS" (  name, hp, attack, defense, special_attack, special_defense, speed     ) 
-                                              VALUES         (    %s, %s,     %s,      %s,             %s,              %s,    %s)
+                                              VALUES         (     %s, %s,     %s,      %s,             %s,              %s,    %s)
                     """
 
             record_to_insert = ( name , hp , attack , defense , special_attack , special_defense , speed , )

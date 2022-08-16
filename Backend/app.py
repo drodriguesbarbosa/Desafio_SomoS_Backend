@@ -44,18 +44,7 @@ def inserir_carta():
                                          
 
     if result:
-        return jsonify({
-  "name": "name",
-  "attributes": {
-    "hp": "hp",
-    "attack": "attack",
-    "defense": "defense",
-    "special_attack": "special_attack",
-    "special_defense": "special_defense",
-    "speed": "speed"
-  }
-}
-)
+        return jsonify({'status': '200'})
     else:
         return jsonify({'status' : 'False'})
 
@@ -79,7 +68,7 @@ def select_card_by_id(id):
     if result:
         return jsonify({'status': '200', 'id': result})
     else:
-        return jsonify({'status': 'false'})
+        return jsonify({'status': 'false'})    
 
 
 @app.route('/update_card/<string:id>', methods = ['POST'])
