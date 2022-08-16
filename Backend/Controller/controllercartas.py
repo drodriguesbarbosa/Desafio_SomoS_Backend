@@ -32,7 +32,7 @@ class ControllerCartas():
 
         except Exception as ex:
 
-            print("Error during carta insertion. Error: {}".format(str(ex)))
+            print("Error during card insertion. Error: {}".format(str(ex)))
             return False
 
     def select_all_cards(self):
@@ -52,12 +52,12 @@ class ControllerCartas():
                 list_cards.append({
                           'id':                 row[0]
                         , 'name':               row[1]
-                        , 'hp':                 row[3]
-                        , 'attack':             row[4]
-                        , 'defense':            row[5]
-                        , 'special_attack':     row[6]
-                        , 'special_defense':    row[7]
-                        , 'speed':              row[8]})
+                        , 'hp':                 row[2]
+                        , 'attack':             row[3]
+                        , 'defense':            row[4]
+                        , 'special_attack':     row[5]
+                        , 'special_defense':    row[6]
+                        , 'speed':              row[7]})
 
             connection.close_connection(cursor = cursor, connection = conn_obj)
 
